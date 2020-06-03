@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Cadastro de Usuário</title>
+</h:head>
+<h:body>
+	<h:messages 
+		errorStyle="color:red" 
+		warnStyle="color:orange" 
+		infoStyle="color:green"
+		globalOnly="false"/>
+		
+	<h1>.:Cadastro de Usuário:.</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itNome" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."
+					value="#{usuarioController.entity.nome}" />
+				<h:message for="itNome" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Data de Nascimento:" />
+			<h:panelGroup>
+				<h:inputText id="itDataNascimento" value="#{usuarioController.entity.dataNascimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" 
+									   type="localDate"/>
+				</h:inputText>
+				<h:message for="itDataNascimento" style="color:red"/>
+			</h:panelGroup>
+			<h:outputLabel value="Login:" />
+			<h:inputText value="#{usuarioController.entity.login}" />
+			
+			<h:outputLabel value="Senha:" />
+			<h:panelGroup>
+				<h:inputSecret 
+					id="isSenha"
+					value="#{usuarioController.entity.senha}" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."/>
+				<h:message for="isSenha" style="color:red"/>	
+ 			</h:panelGroup>
+				
+			<h:outputLabel value="E-mail:" />
+			<h:inputText value="#{usuarioController.entity.email}" />
+			
+			<h:outputLabel value="Tipo de Usuário:" />
+			<h:selectOneMenu 
+				value="#{usuarioController.entity.tipoUsuario}">
+				<f:selectItems 
+					value="#{usuarioController.listaTipoUsuario}"
+							var="tipo" 
+							itemLabel="#{tipo.label}"/>
+			</h:selectOneMenu>
+		
+		</h:panelGrid>
+		<h:commandButton value="Incluir"
+			disabled="#{usuarioController.entity.id != null}"
+			actionListener="#{usuarioController.incluir}" />
+		<h:commandButton value="Alterar"
+			disabled="#{usuarioController.entity.id == null}"
+			actionListener="#{usuarioController.alterar}" />
+		<h:commandButton value="Excluir"
+			disabled="#{usuarioController.entity.id == null}"
+			actionListener="#{usuarioController.remover}" >
+			<f:ajax execute="@this" render="@form formDataTable"/>
+		</h:commandButton>
+		<h:commandButton value="Limpar" 
+			actionListener="#{usuarioController.limpar}">
+			<f:ajax execute="@this" render="@form"/>
+		</h:commandButton>		
+	</h:form>
+	<h:form id="formDataTable">
+		<h:dataTable id="dataTable" value="#{usuarioController.listaUsuario}" 
+					 var="obj">
+			   <h:column>            
+			      <f:facet name="header">Id</f:facet>            
+			      <h:outputLabel value="#{obj.id}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Nome</f:facet>
+			      <h:outputLabel value="#{obj.nome}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Data de Nascimento</f:facet>
+			      <h:outputLabel value="#{obj.dataNascimento}">
+	      				<f:convertDateTime pattern="dd-MM-yyyy" 
+						   type="localDate"/>
+			      
+			      </h:outputLabel>
+			   </h:column>			   
+			   <h:column>
+			      <f:facet name="header">Login</f:facet>
+			      <h:outputLabel value="#{obj.login}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">E-mail</f:facet>
+			      <h:outputLabel value="#{obj.email}"/>
+			   </h:column>	
+			   <h:column>
+			      <f:facet name="header">Tipo de Usuário</f:facet>
+			      <h:outputLabel value="#{obj.tipoUsuario.label}"/>
+			   </h:column>				   
+			   <h:column>
+			      <f:facet name="header">Ação</f:facet>
+			      <h:commandLink value="Editar" 
+			      		actionListener="#{usuarioController.editar(obj)}"/>
+			   </h:column>		   
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
