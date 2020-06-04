@@ -4,60 +4,64 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
 	<title>Cadastro de Usuário</title>
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+		crossorigin="anonymous" />
 </h:head>
+<scripts> <script
+	src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script> <script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script> <script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script> </scripts>
 <h:body>
-	<h:messages 
-		errorStyle="color:red" 
-		warnStyle="color:orange" 
-		infoStyle="color:green"
-		globalOnly="false"/>
-		
+	<h:messages errorStyle="color:red" warnStyle="color:orange"
+		infoStyle="color:green" globalOnly="false" />
+
 	<h1>.:Cadastro de Usuário:.</h1>
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome:" />
 			<h:panelGroup>
-				<h:inputText 
-					id="itNome" 
-					required="true"
+				<h:inputText id="itNome" required="true"
 					requiredMessage="Esse campo não pode ser nulo."
 					value="#{usuarioController.entity.nome}" />
-				<h:message for="itNome" style="color:red"/>
+				<h:message for="itNome" style="color:red" />
 			</h:panelGroup>
-			
+
 			<h:outputLabel value="Data de Nascimento:" />
 			<h:panelGroup>
-				<h:inputText id="itDataNascimento" value="#{usuarioController.entity.dataNascimento}">
-					<f:convertDateTime pattern="dd/MM/yyyy" 
-									   type="localDate"/>
+				<h:inputText id="itDataNascimento"
+					value="#{usuarioController.entity.dataNascimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
 				</h:inputText>
-				<h:message for="itDataNascimento" style="color:red"/>
+				<h:message for="itDataNascimento" style="color:red" />
 			</h:panelGroup>
 			<h:outputLabel value="Login:" />
 			<h:inputText value="#{usuarioController.entity.login}" />
-			
+
 			<h:outputLabel value="Senha:" />
 			<h:panelGroup>
-				<h:inputSecret 
-					id="isSenha"
-					value="#{usuarioController.entity.senha}" 
-					required="true"
-					requiredMessage="Esse campo não pode ser nulo."/>
-				<h:message for="isSenha" style="color:red"/>	
- 			</h:panelGroup>
-				
+				<h:inputSecret id="isSenha"
+					value="#{usuarioController.entity.senha}" required="true"
+					requiredMessage="Esse campo não pode ser nulo." />
+				<h:message for="isSenha" style="color:red" />
+			</h:panelGroup>
+
 			<h:outputLabel value="E-mail:" />
 			<h:inputText value="#{usuarioController.entity.email}" />
-			
+
 			<h:outputLabel value="Tipo de Usuário:" />
-			<h:selectOneMenu 
-				value="#{usuarioController.entity.tipoUsuario}">
-				<f:selectItems 
-					value="#{usuarioController.listaTipoUsuario}"
-							var="tipo" 
-							itemLabel="#{tipo.label}"/>
+			<h:selectOneMenu value="#{usuarioController.entity.tipoUsuario}">
+				<f:selectItems value="#{usuarioController.listaTipoUsuario}"
+					var="tipo" itemLabel="#{tipo.label}" />
 			</h:selectOneMenu>
-		
+
 		</h:panelGrid>
 		<h:commandButton value="Incluir"
 			disabled="#{usuarioController.entity.id != null}"
@@ -67,50 +71,49 @@
 			actionListener="#{usuarioController.alterar}" />
 		<h:commandButton value="Excluir"
 			disabled="#{usuarioController.entity.id == null}"
-			actionListener="#{usuarioController.remover}" >
-			<f:ajax execute="@this" render="@form formDataTable"/>
+			actionListener="#{usuarioController.remover}">
+			<f:ajax execute="@this" render="@form formDataTable" />
 		</h:commandButton>
-		<h:commandButton value="Limpar" 
+		<h:commandButton value="Limpar"
 			actionListener="#{usuarioController.limpar}">
-			<f:ajax execute="@this" render="@form"/>
-		</h:commandButton>		
+			<f:ajax execute="@this" render="@form" />
+		</h:commandButton>
 	</h:form>
 	<h:form id="formDataTable">
-		<h:dataTable id="dataTable" value="#{usuarioController.listaUsuario}" 
-					 var="obj">
-			   <h:column>            
-			      <f:facet name="header">Id</f:facet>            
-			      <h:outputLabel value="#{obj.id}"/>
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">Nome</f:facet>
-			      <h:outputLabel value="#{obj.nome}"/>
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">Data de Nascimento</f:facet>
-			      <h:outputLabel value="#{obj.dataNascimento}">
-	      				<f:convertDateTime pattern="dd-MM-yyyy" 
-						   type="localDate"/>
-			      
-			      </h:outputLabel>
-			   </h:column>			   
-			   <h:column>
-			      <f:facet name="header">Login</f:facet>
-			      <h:outputLabel value="#{obj.login}"/>
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">E-mail</f:facet>
-			      <h:outputLabel value="#{obj.email}"/>
-			   </h:column>	
-			   <h:column>
-			      <f:facet name="header">Tipo de Usuário</f:facet>
-			      <h:outputLabel value="#{obj.tipoUsuario.label}"/>
-			   </h:column>				   
-			   <h:column>
-			      <f:facet name="header">Ação</f:facet>
-			      <h:commandLink value="Editar" 
-			      		actionListener="#{usuarioController.editar(obj)}"/>
-			   </h:column>		   
+		<h:dataTable id="dataTable" value="#{usuarioController.listaUsuario}"
+			var="obj">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputLabel value="#{obj.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputLabel value="#{obj.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data de Nascimento</f:facet>
+				<h:outputLabel value="#{obj.dataNascimento}">
+					<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
+
+				</h:outputLabel>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Login</f:facet>
+				<h:outputLabel value="#{obj.login}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+				<h:outputLabel value="#{obj.email}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Tipo de Usuário</f:facet>
+				<h:outputLabel value="#{obj.tipoUsuario.label}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ação</f:facet>
+				<h:commandLink value="Editar"
+					actionListener="#{usuarioController.editar(obj)}" />
+			</h:column>
 		</h:dataTable>
 	</h:form>
 </h:body>
