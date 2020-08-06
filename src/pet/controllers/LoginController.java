@@ -3,6 +3,7 @@ package pet.controllers;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import pet.application.Session;
 import pet.application.Util;
 import pet.dao.UsuarioDAO;
 import pet.model.Usuario;
@@ -18,9 +19,13 @@ public class LoginController {
 		Usuario usuario = dao.verificarLoginSenha(getUsuario().getLogin(),
 				Util.hashSHA256(getUsuario().getSenha()));
 		
-		if (usuario != null)
-			return "usuario.xhtml?faces-redirect=true";
-		Util.addErrorMessage("Login ou Senha inv√°lido.");
+		if (usuario != null) {
+			// adicionando um ussuario na sessao
+			Session.getInstance().setAttribute("usuarioLogado", usuario);
+			// redirecionando para o template
+			return "index.xhtml?faces-redirect=true";
+		}
+		Util.addErrorMessage("Login ou Senha inv·lido.");
 		return "";
 	}
 	

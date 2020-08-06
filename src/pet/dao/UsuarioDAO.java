@@ -37,7 +37,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			
 			conn.commit();
 
-			System.out.println("Inclus„o realizada com sucesso.");
+			System.out.println("Inclus√£o realizada com sucesso.");
 			
 			retorno = true;
 
@@ -76,7 +76,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			
 			conn.commit();
 
-			System.out.println("AlteraÁ„o realizada com sucesso.");
+			System.out.println("Altera√ß√£o realizada com sucesso.");
 			
 			retorno = true;
 
@@ -91,6 +91,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 		
 	}
 
+	@Override
 	public boolean delete(int id) {
 		boolean retorno = false;
 		Connection conn = getConnection();
@@ -109,7 +110,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			
 			conn.commit();
 
-			System.out.println("RemoÁ„o realizada com sucesso.");
+			System.out.println("Remo√ß√£o realizada com sucesso.");
 			
 			retorno = true;
 
@@ -123,6 +124,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 		return retorno;
 	}
 
+	@Override
 	public List<Usuario> findAll() {
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 		Connection conn = getConnection();
@@ -164,6 +166,51 @@ public class UsuarioDAO extends DAO<Usuario> {
 		return listaUsuario;
 	}
 	
+	public List<Usuario> findByNome(String nome) {
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		Connection conn = getConnection();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append(" 	id, nome, login, senha, datanascimento, email, tipousuario ");
+		sql.append("FROM ");
+		sql.append("	usuario ");
+		sql.append("WHERE ");
+		sql.append("	nome ilike ? ");
+		sql.append("ORDER BY nome ");
+		
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setString(1, "%" + nome  + "%");
+			
+			ResultSet rs = stat.executeQuery();
+			
+			Usuario usuario = null;
+			
+			while(rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setDataNascimento(rs.getDate("datanascimento").toLocalDate());
+				usuario.setEmail(rs.getString("email"));
+				usuario.setTipoUsuario(TipoUsuario.valueOf(rs.getInt("tipousuario")));
+				listaUsuario.add(usuario);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return listaUsuario;
+	}	
+	
+	@Override
 	public Usuario findById(int id) {
 		Usuario usuario = null;
 		Connection conn = getConnection();

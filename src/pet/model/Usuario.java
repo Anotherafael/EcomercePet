@@ -20,7 +20,7 @@ public class Usuario extends Entity<Usuario> {
 	private String senha;
 	
 	@Email(message= "E-mail inválido.")
-	@NotEmpty(message = "O e-mail deve ser informado.")
+	@NotEmpty(message = "O E-mail deve ser informado.")
 	private String email;
 	
 	private TipoUsuario tipoUsuario;

@@ -5,7 +5,6 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-
 public class Util {
 	
 	private Util() {
