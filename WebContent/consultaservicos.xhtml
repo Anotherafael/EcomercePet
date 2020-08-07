@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="index.xhtml">
+	<ui:define name="conteudo">
+
+		<section class="resume-section" id="servicos">
+			<div class="resume-section-content">
+				<h2 class="mb-5">Serviços</h2>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
+						<h:form>
+							<h:panelGrid columns="3">
+								<h:selectOneMenu value="#{consultaServicoController.tipoFiltro}">
+									<f:selectItem itemValue="1" itemLabel="Nome" />
+								</h:selectOneMenu>
+								<h:panelGroup>
+									<h:inputText value="#{consultaServicoController.filtro}" />
+								</h:panelGroup>
+								<h:commandButton value="Pesquisar"
+									actionListener="#{consultaServicoController.pesquisar}" />
+								<h:commandButton value="+ Novo Serviço"
+									action="#{consultaServicoController.novoServico}" />
+							</h:panelGrid>
+						</h:form>
+					</div>
+				</div>
+				<div class="d-flex flex-column flex-md-row justify-content-between">
+					<div class="flex-grow-1">
+						<h:form id="formDataTable2">
+							<h:dataTable id="dataTable2"
+								value="#{consultaServicoController.listaServico}" var="obj">
+								<h:column>
+									<f:facet name="header">Nome</f:facet>
+									<h:outputLabel value="#{obj.nome}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Descrição</f:facet>
+									<h:outputLabel value="#{obj.descricao}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Preço</f:facet>
+									<h:outputLabel value="#{obj.preco}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Reserva</f:facet>
+									<h:outputLabel value="#{obj.reserva}" />
+								</h:column>
+							</h:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<hr class="m-0" />
+	</ui:define>
+</ui:composition>
+</html>
+

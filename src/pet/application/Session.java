@@ -18,7 +18,7 @@ public class Session {
 
 	private ExternalContext getExternalContext() {
 		if (FacesContext.getCurrentInstance() == null) {
-			throw new RuntimeException("O FacesContext Ã© exclusivo para uma requisiÃ§Ã£o HTTP.");
+			throw new RuntimeException("O FacesContext é exclusivo para uma requisição HTTP.");
 		}
 		return FacesContext.getCurrentInstance().getExternalContext();
 	}

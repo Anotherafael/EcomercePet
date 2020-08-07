@@ -23,7 +23,7 @@ public class Usuario extends Entity<Usuario> {
 	@NotEmpty(message = "O E-mail deve ser informado.")
 	private String email;
 	
-	private TipoUsuario tipoUsuario;
+	private TipoUsuario tipoUsuario = TipoUsuario.CLIENTE;
 
 	public String getNome() {
 		return nome;

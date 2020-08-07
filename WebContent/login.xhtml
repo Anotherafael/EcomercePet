@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Login</title>
 	<h:outputStylesheet library="css" name="loginstyle.css" />
@@ -32,12 +33,11 @@
 			<!-- Login Form -->
 
 			<h:form>
-				<p>Usuário</p>
 				<h:inputText id="username" styleClass="fadeIn second"
 					value="#{loginController.usuario.login}"></h:inputText>
-				<p>Senha</p>
 				<h:inputSecret id="password" styleClass="fadeIn third"
 					value="#{loginController.usuario.senha}"></h:inputSecret>
+				<h:link outcome="registrar.xhtml">Registre-se</h:link>
 				<h:commandButton styleClass="fadeIn fourth" value="Login"
 					action="#{loginController.logar}">
 					<f:ajax execute="@form" render="@form messages" />

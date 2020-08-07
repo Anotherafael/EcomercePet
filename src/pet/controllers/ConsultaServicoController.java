@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import pet.dao.ServicoDAO;
+import pet.dao.UsuarioDAO;
 import pet.model.Servico;
 
 @Named
@@ -46,6 +47,9 @@ public class ConsultaServicoController implements Serializable{
 	public List<Servico> getListaServico() {
 		if (listaServico == null) {
 			listaServico = new ArrayList<Servico>();
+			ServicoDAO dao = new ServicoDAO();
+			listaServico = dao.findAll();
+			pesquisar();
 		}
 		return listaServico;
 	}

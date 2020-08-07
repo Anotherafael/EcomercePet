@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="index.xhtml">
+	<ui:define name="conteudo">
+
+		<section class="resume-section">
+			<div class="resume-section-content">
+				<h2 class="mb-5">Usuários</h2>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
+						<h:form>
+							<h:panelGrid id="panelForm" columns="3">
+								<h:selectOneMenu value="#{consultaUsuarioController.tipoFiltro}">
+									<f:selectItem itemValue="1" itemLabel="Nome" />
+								</h:selectOneMenu>
+								<h:panelGroup>
+									<h:inputText value="#{consultaUsuarioController.filtro}" />
+								</h:panelGroup>
+								<h:commandButton value="Pesquisar"
+									actionListener="#{consultaUsuarioController.pesquisar}">
+								</h:commandButton>
+								<h:commandButton value="+ Novo Usuário"
+									action="#{consultaUsuarioController.novoUsuario}" />
+							</h:panelGrid>
+						</h:form>
+					</div>
+				</div>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
+						<h:form id="formDataTable">
+							<h:dataTable id="dataTable"
+								value="#{consultaUsuarioController.listaUsuario}" var="obj">
+								<h:column>
+									<f:facet name="header">Nome</f:facet>
+									<h:outputLabel value="#{obj.nome}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Nascimento</f:facet>
+									<h:outputLabel value="#{obj.dataNascimento}">
+										<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
+									</h:outputLabel>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Login</f:facet>
+									<h:outputLabel value="#{obj.login}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">E-mail</f:facet>
+									<h:outputLabel value="#{obj.email}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Tipo</f:facet>
+									<h:outputLabel value="#{obj.tipoUsuario.label}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Ação</f:facet>
+									<h:link value="editar" outcome="usuario.xhtml" />
+								</h:column>
+							</h:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</ui:define>
+</ui:composition>
+</html>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="index.xhtml">
+	<ui:define name="conteudo">
+
+		<section class="resume-section" id="carrinho">
+			<div class="resume-section-content">
+				<h2 class="mb-5">Detalhes</h2>
+
+				<h:form>
+					<h:messages id="messages" style="color:red" globalOnly="false" />
+
+					<div class="mb-2">
+						<h:outputLabel value="Cliente: " />
+						<h:outputText
+							value=" #{detalheVendaController.venda.usuario.nome}" />
+					</div>
+					<div class="mb-2">
+						<h:outputLabel value="Data da Venda: " />
+						<h:outputText value=" #{detalheVendaController.venda.data}">
+							<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</div>
+					<div class="mb-2">
+						<h:outputLabel value="Total da venda: " />
+						<h:outputText value=" #{detalheVendaController.venda.totalVenda}">
+							<f:convertNumber locale="pt_BR" currencySymbol="R$"
+								type="currency" />
+						</h:outputText>
+					</div>
+
+					<hr />
+
+					<div class="mb-2">
+						<h:outputLabel value="Itens vendidos: " styleClass="control-label" />
+						<h:dataTable
+							value="#{detalheVendaController.venda.listaItemVenda}" var="obj">
+							<h:column>
+								<f:facet name="header">Nome</f:facet>
+								<h:outputLabel value="#{obj.servico.nome}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Valor</f:facet>
+								<h:outputLabel value="#{obj.valor}">
+									<f:convertNumber locale="pt_BR" currencySymbol="R$"
+										type="currency" />
+								</h:outputLabel>
+							</h:column>
+
+						</h:dataTable>
+					</div>
+					<div class="mb-2">
+						<h:commandButton value="Voltar"
+							onclick="history.go(-1); return false;" />
+					</div>
+				</h:form>
+			</div>
+
+		</section>
+		<hr class="m-0" />
+	</ui:define>
+</ui:composition>
+</html>
+
