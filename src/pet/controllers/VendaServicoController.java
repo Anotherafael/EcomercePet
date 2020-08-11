@@ -56,7 +56,7 @@ public class VendaServicoController implements Serializable {
 	public List<Servico> getListaServico() {
 		if (listaServico == null) {
 			ServicoDAO dao = new ServicoDAO();
-			listaServico = dao.findByNome(getDescricao());
+			listaServico = dao.findByNome("");
 			if (listaServico == null)
 				listaServico = new ArrayList<Servico>();
 		}

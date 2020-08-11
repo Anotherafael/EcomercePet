@@ -3,11 +3,15 @@ package pet.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import pet.application.Util;
+import pet.dao.ServicoDAO;
 import pet.dao.UsuarioDAO;
+import pet.model.Servico;
 import pet.model.TipoUsuario;
 import pet.model.Usuario;
 
@@ -21,6 +25,9 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 	
 	public UsuarioController() {
 		super(new UsuarioDAO());
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.keep("flashUsuario");
+		entity = (Usuario) flash.get("flashUsuario");
 	}
 	
 	@Override

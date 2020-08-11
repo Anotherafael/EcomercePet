@@ -6,6 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import pet.application.Session;
+import pet.model.TipoUsuario;
 import pet.model.Usuario;
 
 @Named
@@ -20,6 +21,17 @@ public class MenuController implements Serializable {
 		if (usuarioLogado == null) // buscando o usuario da sessao
 			usuarioLogado = (Usuario) Session.getInstance().getAttribute("usuarioLogado");			
 		return usuarioLogado;
+	}
+	
+	public boolean isAdmin() {
+		
+		getUsuarioLogado();
+		if (usuarioLogado == null) { 
+			return false;
+		} if (usuarioLogado.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {

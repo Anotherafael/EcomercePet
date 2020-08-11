@@ -47,9 +47,6 @@ public class ConsultaServicoController implements Serializable{
 	public List<Servico> getListaServico() {
 		if (listaServico == null) {
 			listaServico = new ArrayList<Servico>();
-			ServicoDAO dao = new ServicoDAO();
-			listaServico = dao.findAll();
-			pesquisar();
 		}
 		return listaServico;
 	}

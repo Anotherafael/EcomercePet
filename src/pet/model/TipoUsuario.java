@@ -2,10 +2,8 @@ package pet.model;
 
 public enum TipoUsuario {
 	
-	NAO_DEFINIDO(0, "Selecione um tipo..."),
-	ADMINISTRADOR(1, "Adminstrador"), 
-	FUNCIONARIO(2, "Funcionário"),
-	CLIENTE(3, "Cliente");
+	CLIENTE(1, "Cliente"),
+	ADMINISTRADOR(2, "Administrador");
 	
 	private int id;
 	private String label;

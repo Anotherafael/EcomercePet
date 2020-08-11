@@ -3,6 +3,8 @@ package pet.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import pet.dao.ItemVendaDAO;
+
 public class Venda extends Entity<Venda> {
 
 	private LocalDate data;
@@ -28,6 +30,10 @@ public class Venda extends Entity<Venda> {
 	}
 
 	public List<ItemVenda> getListaItemVenda() {
+		if (listaItemVenda == null) {
+			ItemVendaDAO dao = new ItemVendaDAO();
+			listaItemVenda = dao.findAll();
+		}
 		return listaItemVenda;
 	}
 

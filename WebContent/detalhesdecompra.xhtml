@@ -3,66 +3,88 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="index.xhtml">
-	<ui:define name="conteudo">
 
-		<section class="resume-section" id="carrinho">
-			<div class="resume-section-content">
-				<h2 class="mb-5">Detalhes</h2>
+<ui:composition template="templateloja.xhtml">
+	<ui:define name="conteudo2">
 
-				<h:form>
-					<h:messages id="messages" style="color:red" globalOnly="false" />
+		<h:messages errorStyle="color:red" warnStyle="color:orange"
+			infoStyle="color:green" globalOnly="false" />
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Histórico</h1>
+				<BR />
 
-					<div class="mb-2">
-						<h:outputLabel value="Cliente: " />
-						<h:outputText
-							value=" #{detalheVendaController.venda.usuario.nome}" />
-					</div>
-					<div class="mb-2">
-						<h:outputLabel value="Data da Venda: " />
-						<h:outputText value=" #{detalheVendaController.venda.data}">
-							<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
-						</h:outputText>
-					</div>
-					<div class="mb-2">
-						<h:outputLabel value="Total da venda: " />
-						<h:outputText value=" #{detalheVendaController.venda.totalVenda}">
-							<f:convertNumber locale="pt_BR" currencySymbol="R$"
-								type="currency" />
-						</h:outputText>
-					</div>
+				<h:form style="min-height:350px;">
+					<div class="row" style="text-align: center;">
+						<div class="col-lg-4 col-md-6 mb-4">
+							<div class="card mb-4" style="min-width: 300px">
+								<h:form>
+									<div class="card-header">
+										<i class="fas fa-table mr-1"></i>Lista de Compras (Pedido nº
+										<h:outputText value="#{detalheVendaController.venda.id}"></h:outputText>
+										)
+									</div>
+								</h:form>
+								<div class="card-body">
+									<h:form>
+										<h:messages id="messages" style="color:red" globalOnly="false" />
 
-					<hr />
+										<div class="mb-2">
+											<h:outputLabel value="Cliente: " />
+											<h:outputText
+												value=" #{detalheVendaController.venda.usuario.nome}" />
+										</div>
+										<div class="mb-2">
+											<h:outputLabel value="Data da Venda: " />
+											<h:outputText value=" #{detalheVendaController.venda.data}">
+												<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+											</h:outputText>
+										</div>
+										<div class="mb-2">
+											<h:outputLabel value="Total da venda: " />
+											<h:outputText
+												value=" #{detalheVendaController.venda.totalVenda}">
+												<f:convertNumber locale="pt_BR" currencySymbol="R$"
+													type="currency" />
+											</h:outputText>
+										</div>
 
-					<div class="mb-2">
-						<h:outputLabel value="Itens vendidos: " styleClass="control-label" />
-						<h:dataTable
-							value="#{detalheVendaController.venda.listaItemVenda}" var="obj">
-							<h:column>
-								<f:facet name="header">Nome</f:facet>
-								<h:outputLabel value="#{obj.servico.nome}" />
-							</h:column>
+										<hr />
 
-							<h:column>
-								<f:facet name="header">Valor</f:facet>
-								<h:outputLabel value="#{obj.valor}">
-									<f:convertNumber locale="pt_BR" currencySymbol="R$"
-										type="currency" />
-								</h:outputLabel>
-							</h:column>
+										<div class="mb-2">
+											<h:outputLabel value="Itens vendidos: "
+												styleClass="control-label" />
+											<h:dataTable class="table table-bordered" id="dataTable"
+												width="100%" cellspacing="0"
+												value="#{detalheVendaController.venda.listaItemVenda}"
+												var="obj">
+												<h:column>
+													<f:facet name="header">Nome</f:facet>
+													<h:outputLabel value="#{obj.servico.nome}" />
+												</h:column>
 
-						</h:dataTable>
-					</div>
-					<div class="mb-2">
-						<h:commandButton value="Voltar"
-							onclick="history.go(-1); return false;" />
+												<h:column>
+													<f:facet name="header">Valor</f:facet>
+													<h:outputLabel value="#{obj.valor}">
+														<f:convertNumber locale="pt_BR" currencySymbol="R$"
+															type="currency" />
+													</h:outputLabel>
+												</h:column>
+
+											</h:dataTable>
+										</div>
+										<div class="mb-2">
+											<h:commandButton value="Voltar"
+												onclick="history.go(-1); return false;" />
+										</div>
+									</h:form>
+								</div>
+							</div>
+						</div>
 					</div>
 				</h:form>
 			</div>
-
-		</section>
-		<hr class="m-0" />
+		</main>
 	</ui:define>
 </ui:composition>
 </html>
-

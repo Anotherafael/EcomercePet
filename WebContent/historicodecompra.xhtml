@@ -3,58 +3,72 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="index.xhtml">
-	<ui:define name="conteudo">
 
-		<section class="resume-section" id="carrinho">
-			<div class="resume-section-content">
-				<h2 class="mb-5">Histórico</h2>
-				<h:form>
-					<h:messages style="color:red" />
+<ui:composition template="templateloja.xhtml">
+	<ui:define name="conteudo2">
 
-					<h:dataTable value="#{historicoVendaController.listaVenda}"
-						var="obj">
-						<h:column>
-							<f:facet name="header">Id</f:facet>
-							<h:outputLabel value="#{obj.id}" />
-						</h:column>
+		<h:messages errorStyle="color:red" warnStyle="color:orange"
+			infoStyle="color:green" globalOnly="false" />
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Histórico</h1>
+				<BR />
 
-						<h:column>
-							<f:facet name="header">Data</f:facet>
-							<h:outputLabel value="#{obj.data}">
-								<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
-							</h:outputLabel>
-						</h:column>
+				<h:form style="min-height:350px;">
+					<div class="row" style="text-align: center;">
+						<div class="col-lg-4 col-md-6 mb-4">
+							<div class="card mb-4" style="min-width: 650px">
+								<div class="card-header">
+									<i class="fas fa-table mr-1"></i>Lista de Compras
+								</div>
+								<div class="card-body">
+									<h:form>
+										<h:dataTable class="table table-bordered" id="dataTable"
+											width="100%" cellspacing="0"
+											value="#{historicoVendaController.listaVenda}" var="obj">
+											<h:column>
+												<f:facet name="header">ID do Pedido</f:facet>
+												<h:outputLabel value="#{obj.id}" />
+											</h:column>
 
-						<h:column>
-							<f:facet name="header">Cliente</f:facet>
-							<h:outputLabel value="#{obj.usuario.nome}" />
-						</h:column>
+											<h:column>
+												<f:facet name="header">Data</f:facet>
+												<h:outputLabel value="#{obj.data}">
+													<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+												</h:outputLabel>
+											</h:column>
+											<h:column>
+												<f:facet name="header">Cliente</f:facet>
+												<h:outputLabel value="#{obj.usuario.nome}" />
+											</h:column>
 
-						<h:column>
-							<f:facet name="header">Total da Compra</f:facet>
-							<h:outputLabel value="#{obj.totalVenda}">
-								<f:convertNumber locale="pt_BR" currencySymbol="R$"
-									type="currency" />
-							</h:outputLabel>
-						</h:column>
+											<h:column>
+												<f:facet name="header">Total da Compra</f:facet>
+												<h:outputLabel value="#{obj.totalVenda}">
+													<f:convertNumber locale="pt_BR" currencySymbol="R$"
+														type="currency" />
+												</h:outputLabel>
+											</h:column>
 
-						<h:column>
-							<f:facet name="header">Ação</f:facet>
-							<h:commandButton value="Detalhes ..."
-								action="#{historicoVendaController.detalhes(obj)}">
-								<f:ajax execute="@this" render="@none" />
-							</h:commandButton>
-						</h:column>
+											<h:column>
+												<f:facet name="header">Ação</f:facet>
+												<h:commandButton value="Detalhes ..."
+													action="#{historicoVendaController.detalhes(obj)}">
+													<f:ajax execute="@this" render="@none" />
+												</h:commandButton>
+											</h:column>
 
 
-					</h:dataTable>
+										</h:dataTable>
 
+									</h:form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</h:form>
 			</div>
-		</section>
-		<hr class="m-0" />
+		</main>
 	</ui:define>
 </ui:composition>
 </html>
-

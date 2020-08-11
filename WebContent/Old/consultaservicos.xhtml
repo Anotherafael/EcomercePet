@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="index.xhtml">
+<ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
 
 		<section class="resume-section" id="servicos">
@@ -48,6 +48,11 @@
 								<h:column>
 									<f:facet name="header">Reserva</f:facet>
 									<h:outputLabel value="#{obj.reserva}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header"></f:facet>
+									<h:commandLink value="Editar"
+										action="#{consultaServicoController.editar(obj)}" />
 								</h:column>
 							</h:dataTable>
 						</h:form>
