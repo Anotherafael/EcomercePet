@@ -39,7 +39,7 @@
 							<a class="nav-link" href="carrinho.xhtml">Carrinho (<h:outputLabel value="#{carrinhoController.tamanho}">)</h:outputLabel></a>
 						</li>
 						<li class="nav-item">
-							<h:commandLink class="nav-link" value="Suporte" action="loja.xhtml?faces-redirect=true"/>
+							<h:commandLink class="nav-link" value="Suporte" action="suporte.xhtml?faces-redirect=true"/>
 						</li>
 						<li class="nav-item">
 							<h:commandLink class="nav-link" value="Admin" action="admin.xhtml?faces-redirect=true" rendered="#{menuController.admin != false}" />
@@ -80,7 +80,7 @@
 			</div>
 			<!-- /.col-lg-3 -->
 
-			<div class="col-lg-9">
+			<div class="col-lg-9" style="min-height:450px;">
 
 				<ui:insert name="conteudo2">
 				</ui:insert>
