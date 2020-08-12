@@ -3,72 +3,105 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <ui:composition template="templateadmin.xhtml">
 	<ui:define name="conteudo">
-
-		<h:messages errorStyle="color:red" warnStyle="color:orange"
-			infoStyle="color:green" globalOnly="false" />
 		<main>
 			<div class="container-fluid">
 				<h1 class="mt-4">Users Board</h1>
 
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputLabel value="Nome:" />
-						<h:panelGroup>
-							<h:inputText id="itNome" required="true"
-								requiredMessage="Esse campo não pode ser nulo."
-								value="#{usuarioController.entity.nome}" />
-							<h:message for="itNome" style="color:red" />
-						</h:panelGroup>
-
-						<h:outputLabel value="Data de Nascimento:" />
-						<h:panelGroup>
-							<h:inputText id="itDataNascimento"
-								value="#{usuarioController.entity.dataNascimento}">
-								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
-							</h:inputText>
-							<h:message for="itDataNascimento" style="color:red" />
-						</h:panelGroup>
-						<h:outputLabel value="Login:" />
-						<h:inputText value="#{usuarioController.entity.login}" />
-
-						<h:outputLabel value="Senha:" />
-						<h:panelGroup>
-							<h:inputSecret id="isSenha"
-								value="#{usuarioController.entity.senha}" required="true"
-								requiredMessage="Esse campo não pode ser nulo." />
-							<h:message for="isSenha" style="color:red" />
-						</h:panelGroup>
-
-						<h:outputLabel value="E-mail:" />
-						<h:inputText value="#{usuarioController.entity.email}" />
-
-						<h:outputLabel value="Tipo de Usuário:" />
-						<h:selectOneMenu value="#{usuarioController.entity.tipoUsuario}">
-							<f:selectItems value="#{usuarioController.listaTipoUsuario}"
-								var="tipo" itemLabel="#{tipo.label}" />
-						</h:selectOneMenu>
-
-					</h:panelGrid>
-					<h:commandButton value="Incluir"
-						disabled="#{usuarioController.entity.id != null}"
-						actionListener="#{usuarioController.incluir}" />
-					<h:commandButton value="Alterar"
-						disabled="#{usuarioController.entity.id == null}"
-						actionListener="#{usuarioController.alterar}" />
-					<h:commandButton value="Excluir"
-						disabled="#{usuarioController.entity.id == null}"
-						actionListener="#{usuarioController.remover}">
-						<f:ajax execute="@this" render="@form formDataTable" />
-					</h:commandButton>
-					<h:commandButton value="Limpar"
-						actionListener="#{usuarioController.limpar}">
-						<f:ajax execute="@this" render="@form" />
-					</h:commandButton>
-				</h:form>
-				<br></br>
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-area mr-1"></i> Informações do Usuário
+							</div>
+							<h:form>
+								<div class="card-body">
+									<div class="form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Nome</label>
+												<h:inputText class="form-control py-4" id="itNome"
+													required="true"
+													requiredMessage="O nome não pode estar vazio."
+													value="#{usuarioController.entity.nome}" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Username</label>
+												<h:inputText class="form-control py-4"
+													value="#{usuarioController.entity.login}" />
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="small mb-1">Email</label>
+										<h:inputText class="form-control py-4"
+											value="#{usuarioController.entity.email}" />
+									</div>
+									<div class="form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Password</label>
+												<h:inputSecret class="form-control py-4" id="isSenha"
+													value="#{usuarioController.entity.senha}" required="true"
+													requiredMessage="A senha não pode estar vazia." />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Data de Nascimento
+													(dd/MM/yyyy)</label>
+												<h:inputText class="form-control py-4" id="itDataNascimento"
+													value="#{usuarioController.entity.dataNascimento}"
+													required="true"
+													requiredMessage="A data não pode estar vazia.">
+													<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+												</h:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="form-row"> 
+										<h:selectOneMenu
+											value="#{usuarioController.entity.tipoUsuario}">
+											<f:selectItems value="#{usuarioController.listaTipoUsuario}"
+												var="tipo" itemLabel="#{tipo.label}" />
+										</h:selectOneMenu>
+									</div>
+									<div
+										class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+										<h:commandButton class="btn btn-primary" style="width:25%;" value="Incluir"
+											disabled="#{usuarioController.entity.id != null}"
+											actionListener="#{usuarioController.incluir}" />
+										<h:commandButton class="btn btn-primary" style="width:25%;" value="Alterar"
+											disabled="#{usuarioController.entity.id == null}"
+											actionListener="#{usuarioController.alterar}" />
+										<h:commandButton class="btn btn-primary" style="width:25%;" value="Excluir"
+											disabled="#{usuarioController.entity.id == null}"
+											actionListener="#{usuarioController.remover}">
+											<f:ajax execute="@this" render="@form formDataTable" />
+										</h:commandButton>
+										<h:commandButton class="btn btn-primary" style="width:25%;" value="Limpar"
+											actionListener="#{usuarioController.limpar}">
+											<f:ajax execute="@this" render="@form" />
+										</h:commandButton>
+									</div>
+								</div>
+							</h:form>
+						</div>
+					</div>
+					<div class="col-xl-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-bar mr-1"></i> Bar Chart Example
+							</div>
+							<div class="card-body">
+								<canvas id="myBarChart" width="100%" height="40"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="card mb-4">
 					<div class="card-header">
 						<i class="fas fa-table mr-1"></i> Usuários Cadastrados
@@ -107,7 +140,7 @@
 									</h:column>
 									<h:column>
 										<f:facet name="header">Ação</f:facet>
-										<h:commandLink value="Editar"
+										<h:commandButton class="btn btn-success" value="Editar"
 											actionListener="#{usuarioController.editar(obj)}" />
 									</h:column>
 								</h:dataTable>

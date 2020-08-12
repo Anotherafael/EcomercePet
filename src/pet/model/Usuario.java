@@ -17,6 +17,7 @@ public class Usuario extends Entity<Usuario> {
 	@NotBlank(message = "O login deve ser informado.")
 	private String login;
 	
+	@NotEmpty(message= "A senha deve ser informada")
 	private String senha;
 	
 	@Email(message= "E-mail inválido.")

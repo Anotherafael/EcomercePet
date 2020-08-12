@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="templateadmin.xhtml">
+	<ui:define name="conteudo">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Histórico de Compras</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item active">Activity Log</li>
+				</ol>
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-area mr-1"></i> Informações da Venda
+							</div>
+							<div class="card-body">
+								<div class="mb-2">
+									<h:outputLabel value="Cliente: " />
+									<h:outputText
+										value=" #{detalheController.venda.usuario.nome}" />
+								</div>
+								<div class="mb-2">
+									<h:outputLabel value="Data da Venda: " />
+									<h:outputText value=" #{detalheController.venda.data}">
+										<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</div>
+								<div class="mb-2">
+									<h:outputLabel value="Total da venda: " />
+									<h:outputText
+										value=" #{detalheController.venda.totalVenda}">
+										<f:convertNumber locale="pt_BR" currencySymbol="R$"
+											type="currency" />
+									</h:outputText>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-bar mr-1"></i> Bar Chart Example
+							</div>
+							<div class="card-body">
+								<canvas id="myBarChart" width="100%" height="40"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-table mr-1"></i> DataTable Example
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<h:form>
+								<h:dataTable class="table table-bordered" id="dataTable"
+									width="100%" cellspacing="0"
+									value="#{detalheController.venda.listaItemVenda}" var="obj">
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputLabel value="#{obj.servico.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Valor</f:facet>
+										<h:outputLabel value="#{obj.valor}">
+											<f:convertNumber locale="pt_BR" currencySymbol="R$"
+												type="currency" />
+										</h:outputLabel>
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</ui:define>
+</ui:composition>
+</html>

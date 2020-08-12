@@ -6,78 +6,82 @@
 
 <ui:composition template="templateadmin.xhtml">
 	<ui:define name="conteudo">
-			<main>
-				<div class="container-fluid">
-					<h1 class="mt-4">Histórico de Compras</h1>
-					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item active">Dashboard</li>
-					</ol>
-					<div class="row">
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
-									<i class="fas fa-chart-area mr-1"></i> Area Chart Example
-								</div>
-								<div class="card-body">
-									<canvas id="myAreaChart" width="100%" height="40"></canvas>
-								</div>
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Histórico de Compras</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item active">Activity Log</li>
+				</ol>
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-area mr-1"></i> Area Chart Example
 							</div>
-						</div>
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
-									<i class="fas fa-chart-bar mr-1"></i> Bar Chart Example
-								</div>
-								<div class="card-body">
-									<canvas id="myBarChart" width="100%" height="40"></canvas>
-								</div>
+							<div class="card-body">
+								<canvas id="myAreaChart" width="100%" height="40"></canvas>
 							</div>
 						</div>
 					</div>
-					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-table mr-1"></i> DataTable Example
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<h:form id="formDataTable">
-									<h:dataTable class="table table-bordered" id="dataTable"
-										width="100%" cellspacing="0"
-										value="#{usuarioController.listaUsuario}" var="obj">
-										<h:column>
-											<f:facet name="header">Nome</f:facet>
-											<h:outputLabel value="#{obj.nome}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Nascimento</f:facet>
-											<h:outputLabel value="#{obj.dataNascimento}">
-												<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
-											</h:outputLabel>
-										</h:column>
-										<h:column>
-											<f:facet name="header">Login</f:facet>
-											<h:outputLabel value="#{obj.login}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">E-mail</f:facet>
-											<h:outputLabel value="#{obj.email}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Tipo</f:facet>
-											<h:outputLabel value="#{obj.tipoUsuario.label}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header"></f:facet>
-											<h:commandLink value="Editar"
-												action="#{consultaUsuarioController.editar(obj)}" />
-										</h:column>
-									</h:dataTable>
-								</h:form>
+					<div class="col-xl-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-bar mr-1"></i> Bar Chart Example
+							</div>
+							<div class="card-body">
+								<canvas id="myBarChart" width="100%" height="40"></canvas>
 							</div>
 						</div>
 					</div>
 				</div>
-			</main>
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-table mr-1"></i> DataTable Example
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<h:form>
+								<h:dataTable class="table table-bordered" id="dataTable"
+									width="100%" cellspacing="0"
+									value="#{historicoController.listaVenda}" var="obj">
+									<h:column>
+										<f:facet name="header">ID do Pedido</f:facet>
+										<h:outputLabel value="#{obj.id}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Data</f:facet>
+										<h:outputLabel value="#{obj.data}">
+											<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+										</h:outputLabel>
+									</h:column>
+									<h:column>
+										<f:facet name="header">Cliente</f:facet>
+										<h:outputLabel value="#{obj.usuario.nome}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Total da Compra</f:facet>
+										<h:outputLabel value="#{obj.totalVenda}">
+											<f:convertNumber locale="pt_BR" currencySymbol="R$"
+												type="currency" />
+										</h:outputLabel>
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandButton styleClass="btn btn-info" value="Detalhes ..."
+											action="#{historicoController.detalhes(obj)}">
+											<f:ajax execute="@this" render="@none" />
+										</h:commandButton>
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
 	</ui:define>
 </ui:composition>
 </html>

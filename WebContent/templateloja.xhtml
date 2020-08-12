@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE html [
+<!ENTITY nbsp "&#160;">  
+<!ENTITY copy "&#169;"> 
+<!ENTITY bull "&#8226;"> ]>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -35,28 +38,35 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active"><a class="nav-link"
 							href="loja.xhtml">Loja </a></li>
-						<li class="nav-item">
-							<a class="nav-link" href="carrinho.xhtml">Carrinho (<h:outputLabel value="#{carrinhoController.tamanho}">)</h:outputLabel></a>
-						</li>
-						<li class="nav-item">
-							<h:commandLink class="nav-link" value="Suporte" action="suporte.xhtml?faces-redirect=true"/>
-						</li>
-						<li class="nav-item">
-							<h:commandLink class="nav-link" value="Admin" action="admin.xhtml?faces-redirect=true" rendered="#{menuController.admin != false}" />
-						</li>
-						<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" id="userDropdown" href="#"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-									<h:outputLabel class="dropdown-item" value="Bem vindo, #{menuController.usuarioLogado.nome}" rendered="#{menuController.usuarioLogado != null}" />
-									<h:commandLink class="dropdown-item" value="Login" action="login.xhtml?faces-redirect=true" rendered="#{menuController.usuarioLogado == null}" />
-									<h:commandLink class="dropdown-item" value="Perfil" action="perfil.xhtml?faces-redirect=true" rendered="#{menuController.usuarioLogado != null}" />
-									<h:commandLink class="dropdown-item" value="Histórico" action="historicodecompra.xhtml?faces-redirect=true" rendered="#{menuController.usuarioLogado != null}" />
-									<div class="dropdown-divider"></div>
-									<h:commandLink class="dropdown-item" value="Sair" action="#{menuController.encerrarSessao}" rendered="#{menuController.usuarioLogado != null}" />
-								</div>
-						</li>
+						<li class="nav-item"><a class="nav-link"
+							href="carrinho.xhtml">Carrinho (<h:outputLabel
+									value="#{carrinhoController.tamanho}">)</h:outputLabel></a></li>
+						<li class="nav-item"><h:commandLink class="nav-link"
+								value="Admin" action="admin.xhtml?faces-redirect=true"
+								rendered="#{menuController.admin != false}" /></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" id="userDropdown" href="#"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"><i class="fas fa-user fa-fw" /></a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="userDropdown">
+								<h:outputLabel class="dropdown-item"
+									value="Bem vindo, #{menuController.usuarioLogado.nome}"
+									rendered="#{menuController.usuarioLogado != null}" />
+								<h:commandLink class="dropdown-item" value="Login"
+									action="login.xhtml?faces-redirect=true"
+									rendered="#{menuController.usuarioLogado == null}" />
+								<h:commandLink class="dropdown-item" value="Perfil"
+									action="perfil.xhtml?faces-redirect=true"
+									rendered="#{menuController.usuarioLogado != null}" />
+								<h:commandLink class="dropdown-item" value="Histórico"
+									action="historicodecompra.xhtml?faces-redirect=true"
+									rendered="#{menuController.usuarioLogado != null}" />
+								<div class="dropdown-divider" />
+								<h:commandLink class="dropdown-item" value="Sair"
+									action="#{menuController.encerrarSessao}"
+									rendered="#{menuController.usuarioLogado != null}" />
+							</div></li>
 					</ul>
 				</div>
 			</h:form>
@@ -66,22 +76,14 @@
 	<!-- Page Content -->
 	<div class="container">
 
-		<div class="row">
+		<div class="row"
+			style="display: flex; flex-direction: row; justify-content: center; align-items: center">
 
-			<div class="col-lg-3">
+			<div class="col-lg-9" style="min-height: 450px;">
 
-				<h1 class="my-4">Shop Name</h1>
-				<div class="list-group">
-					<a href="#" class="list-group-item">Category 1</a> <a href="#"
-						class="list-group-item">Category 2</a> <a href="#"
-						class="list-group-item">Category 3</a>
-				</div>
-
-			</div>
-			<!-- /.col-lg-3 -->
-
-			<div class="col-lg-9" style="min-height:450px;">
-
+				<h:messages errorStyle="color:red" warnStyle="color:orange"
+					infoStyle="color:green" globalOnly="false"
+					style="list-style-type: none; text-align: center; margin-top:10px;" />
 				<ui:insert name="conteudo2">
 				</ui:insert>
 
@@ -97,7 +99,8 @@
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright by UNITINS 2020</p>
+			<p class="m-0 text-center text-white">Copyright &#169; by Aurora
+				Enterprise</p>
 		</div>
 		<!-- /.container -->
 	</footer>

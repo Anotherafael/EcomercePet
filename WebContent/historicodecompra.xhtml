@@ -34,7 +34,7 @@
 											<h:column>
 												<f:facet name="header">Data</f:facet>
 												<h:outputLabel value="#{obj.data}">
-													<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+													<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
 												</h:outputLabel>
 											</h:column>
 											<h:column>
@@ -52,7 +52,7 @@
 
 											<h:column>
 												<f:facet name="header">Ação</f:facet>
-												<h:commandButton value="Detalhes ..."
+												<h:commandButton class="btn btn-info" value="Detalhes ..."
 													action="#{historicoVendaController.detalhes(obj)}">
 													<f:ajax execute="@this" render="@none" />
 												</h:commandButton>

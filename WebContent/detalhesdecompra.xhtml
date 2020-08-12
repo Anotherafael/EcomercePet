@@ -11,10 +11,9 @@
 			infoStyle="color:green" globalOnly="false" />
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">Histórico</h1>
+				<h1 class="mt-4">Detalhes</h1>
 				<BR />
-
-				<h:form style="min-height:350px;">
+				<h:form>
 					<div class="row" style="text-align: center;">
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card mb-4" style="min-width: 300px">
@@ -35,15 +34,16 @@
 												value=" #{detalheVendaController.venda.usuario.nome}" />
 										</div>
 										<div class="mb-2">
-											<h:outputLabel value="Data da Venda: " />
-											<h:outputText value=" #{detalheVendaController.venda.data}">
+											<h:outputLabel value="Data da Venda" />
+											: 
+											<h:outputText value="#{detalheVendaController.venda.data}">
 												<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
 											</h:outputText>
 										</div>
 										<div class="mb-2">
-											<h:outputLabel value="Total da venda: " />
+											<h:outputLabel value="Total da venda" />: 
 											<h:outputText
-												value=" #{detalheVendaController.venda.totalVenda}">
+												value="#{detalheVendaController.venda.totalVenda}">
 												<f:convertNumber locale="pt_BR" currencySymbol="R$"
 													type="currency" />
 											</h:outputText>

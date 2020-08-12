@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE html [
+<!ENTITY nbsp "&#160;">  
+<!ENTITY copy "&#169;"> 
+<!ENTITY bull "&#8226;"> ]>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -105,6 +108,9 @@
 		</div>
 		<div id="layoutSidenav_content">
 
+			<h:messages class="p-3 mb-2 bg-warning text-dark" globalOnly="false"
+				style="list-style-type: none; text-align: center;"/>
+
 			<ui:insert name="conteudo">
 			</ui:insert>
 
@@ -112,7 +118,8 @@
 				<div class="container-fluid">
 					<div
 						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright by UNITINS 2020</div>
+						<div class="text-muted">Copyright &#169; by Aurora
+							Enterprise 2020</div>
 					</div>
 				</div>
 			</footer>

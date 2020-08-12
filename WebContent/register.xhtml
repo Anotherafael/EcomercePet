@@ -21,18 +21,19 @@
 		<div id="layoutAuthentication_content">
 			<main>
 				<div class="container">
-					<div class="row justify-content-center" style="min-height:620px">
+					<div class="row justify-content-center" style="min-height: 620px">
 						<div class="col-lg-7">
 							<div class="card shadow-lg border-0 rounded-lg mt-5">
 								<div class="card-header">
-									<h3 class="text-center font-weight-light my-4">Criar
-										uma Conta</h3>
+									<h3 class="text-center font-weight-light my-4">Criar uma
+										Conta</h3>
 								</div>
 								<div class="card-body">
 									<h:form>
 										<h:messages id="messages" errorStyle="color:red"
 											warnStyle="color:orange" infoStyle="color:green"
-											globalOnly="false" style="list-style-type: none; text-align:center;" />
+											globalOnly="false"
+											style="list-style-type: none; text-align:center;" />
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="form-group">
@@ -71,7 +72,9 @@
 														de Nascimento (dd/MM/yyyy)</label>
 													<h:inputText class="form-control py-4"
 														id="itDataNascimento"
-														value="#{usuarioController.entity.dataNascimento}">
+														value="#{usuarioController.entity.dataNascimento}"
+														required="true"
+														requiredMessage="A data não pode estar vazia.">
 														<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
 													</h:inputText>
 												</div>

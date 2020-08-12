@@ -7,46 +7,99 @@
 <ui:composition template="templateloja.xhtml">
 	<ui:define name="conteudo2">
 
-		<h:messages errorStyle="color:red" warnStyle="color:orange"
-			infoStyle="color:green" globalOnly="false" />
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">Perfil do Usuário</h1>
+				<h:messages errorStyle="color:red" warnStyle="color:orange"
+					infoStyle="color:green" globalOnly="false"
+					style="list-style-type: none; text-align: center; margin-top:10px;" />
+				<h1 class="mt-4">Perfil</h1>
 				<BR />
-
 				<h:form>
 					<div class="row" style="text-align: center;">
 						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card mb-4" style="width: 400px">
+							<div class="card mb-4" style="min-width: 850px">
 								<div class="card-header">
 									<i class="fas fa-table mr-1"></i>Informações
 								</div>
 								<div class="card-body">
-									<h:form>
-										<div class="mb-2">
-											<h:outputLabel value="Cliente: " />
-											<h:outputText value=" #{perfilController.usuario.nome}" />
-										</div>
-										<div class="mb-2">
-											<h:outputLabel value="Função: " />
-											<h:outputText
-												value=" #{perfilController.usuario.tipoUsuario.label}" />
-										</div>
-										<div class="mb-2">
-											<h:outputLabel value="Data de Nascimento: " />
-
-											<h:outputText
-												value=" #{perfilController.usuario.dataNascimento}">
-												<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
-											</h:outputText>
-										</div>
-									</h:form>
+									<h:dataTable class="table table-bordered" id="dataTable"
+										width="100%" cellspacing="0"
+										value="#{perfilController.usuario}" var="obj">
+										<h:column>
+											<f:facet name="header">Cliente</f:facet>
+											<h:outputLabel value="#{obj.nome}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Username</f:facet>
+											<h:outputLabel value="#{obj.login}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Função</f:facet>
+											<h:outputLabel value="#{obj.tipoUsuario.label}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Email</f:facet>
+											<h:outputLabel value="#{obj.email}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Data de Nascimento</f:facet>
+											<h:outputLabel value="#{obj.dataNascimento}">
+												<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
+											</h:outputLabel>
+										</h:column>
+										<h:column>
+											<h:commandButton class="btn btn-primary" value="Editar"
+												actionListener="#{usuarioController.editar(obj)}" />
+										</h:column>
+									</h:dataTable>
 								</div>
 							</div>
 						</div>
 					</div>
 				</h:form>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome:" />
+						<h:panelGroup>
+							<h:inputText id="itNome" value="#{usuarioController.entity.nome}" />
+							<h:message for="itNome" style="color:red" />
+						</h:panelGroup>
+
+						<h:outputLabel value="Login:" />
+						<h:inputText value="#{usuarioController.entity.login}" />
+
+						<h:outputLabel value="Senha:" />
+						<h:panelGroup>
+							<h:inputSecret id="isSenha"
+								value="#{usuarioController.entity.senha}" required="true"
+								requiredMessage="A senha não pode estar vazia." />
+							<h:message for="isSenha" style="color:red" />
+						</h:panelGroup>
+
+						<h:outputLabel value="E-mail:" />
+						<h:inputText value="#{usuarioController.entity.email}" />
+
+						<h:outputLabel value="Data de Nascimento:" />
+						<h:panelGroup>
+							<h:inputText id="itDataNascimento"
+								value="#{usuarioController.entity.dataNascimento}">
+								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+							</h:inputText>
+							<h:message for="itDataNascimento" style="color:red" />
+						</h:panelGroup>
+
+					</h:panelGrid>
+					<h:commandButton value="Alterar"
+						disabled="#{usuarioController.entity.id == null}"
+						actionListener="#{usuarioController.alterar}" />
+					<h:commandButton value="Limpar"
+						actionListener="#{usuarioController.limpar}">
+						<f:ajax execute="@this" render="@form" />
+					</h:commandButton>
+				</h:form>
+				<BR /> <BR />
 			</div>
+
 		</main>
 	</ui:define>
 </ui:composition>

@@ -7,8 +7,6 @@
 <ui:composition template="templateadmin.xhtml">
 	<ui:define name="conteudo">
 
-		<h:messages errorStyle="color:red" warnStyle="color:orange"
-			infoStyle="color:green" globalOnly="false" />
 		<main>
 			<div class="container-fluid">
 				<h1 class="mt-4">Service Board</h1>
@@ -19,7 +17,6 @@
 							<h:inputText id="itNome" required="true"
 								requiredMessage="Esse campo não pode ser nulo."
 								value="#{servicoController.entity.nome}" />
-							<h:message for="itNome" style="color:red" />
 						</h:panelGroup>
 
 						<h:outputLabel value="Descrição:" />

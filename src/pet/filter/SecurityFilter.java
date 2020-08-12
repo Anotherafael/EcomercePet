@@ -24,40 +24,35 @@ public class SecurityFilter implements Filter {
 			throws IOException, ServletException {
 
 // 	 	Para desabilitar o filter, descomente as duas proximas linhas e comente o restante		
+//		chain.doFilter(request, response);
+//		return;
+
+		HttpServletRequest servletRequest = (HttpServletRequest) request;
+		// imprime o endereco da pagina
+		String endereco = servletRequest.getRequestURI();
+		System.out.println(endereco);
+		if (endereco.equals("/pet/faces/login.xhtml")) {
+			chain.doFilter(request, response);
+			return;
+		}
+		if (endereco.equals("/pet/faces/register.xhtml")) {
+			chain.doFilter(request, response);
+			return;
+		}
+
+		// retorna a sessao corrente (false - para nao criar uma nova sessao)
+		HttpSession session = servletRequest.getSession(false);
+
+		Usuario usuario = null;
+		if (session != null)
+			usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+		if (usuario == null) {
+			((HttpServletResponse) response).sendRedirect("/pet/faces/login.xhtml");
+		} 
+
 		chain.doFilter(request, response);
 		return;
-
-//		HttpServletRequest servletRequest = (HttpServletRequest) request;
-//		// imprime o endereco da pagina
-//		String endereco = servletRequest.getRequestURI();
-//		System.out.println(endereco);
-//		if (endereco.equals("/pet/faces/login.xhtml")) {
-//			chain.doFilter(request, response);
-//			return;
-//		}
-//
-//		// retorna a sessao corrente (false - para nao criar uma nova sessao)
-//		HttpSession session = servletRequest.getSession(false);
-//
-//		Usuario usuario = null;
-//		if (session != null)
-//			usuario = (Usuario) session.getAttribute("usuarioLogado");
-//
-//		if (usuario == null) {
-//			((HttpServletResponse) response).sendRedirect("/pet/faces/login.xhtml");
-//		} else {
-//			// nesse local podemos trabalhar as permissoes por pagina
-//			if (usuario.getTipoUsuario() == TipoUsuario.ADMINISTRADOR) {
-//				((HttpServletResponse) response).sendRedirect("/pet/faces/menuadmin.xhtml");
-//			} else if (usuario.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
-//				((HttpServletResponse) response).sendRedirect("/pet/faces/menufuncionario.xhtml");
-//			} else if (usuario.getTipoUsuario() == TipoUsuario.CLIENTE) {
-//				((HttpServletResponse) response).sendRedirect("/pet/faces/menucliente.xhtml");
-//			} else {
-//				chain.doFilter(request, response);
-//				return;
-//			}
-//		}
 	}
 
 	@Override
