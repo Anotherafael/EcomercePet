@@ -24,8 +24,8 @@ public class ConsultaUsuarioController implements Serializable{
 	
 	public void pesquisar() {
 		UsuarioDAO dao = new UsuarioDAO();
-//		if (tipoFiltro == 1)
-		listaUsuario = dao.findByNome(getFiltro());
+		if (filtro.equals("1"))
+			listaUsuario = dao.findByNome(getFiltro());
 	}
 	
 	public String novoUsuario() {
@@ -46,7 +46,10 @@ public class ConsultaUsuarioController implements Serializable{
 	public List<Usuario> getListaUsuario() {
 		if (listaUsuario == null) {
 			listaUsuario = new ArrayList<Usuario>();
+			UsuarioDAO dao = new UsuarioDAO();
+			listaUsuario = dao.findAll();
 		}
+		
 		return listaUsuario;
 	}
 

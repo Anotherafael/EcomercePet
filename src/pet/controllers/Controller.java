@@ -30,7 +30,7 @@ public abstract class Controller <T extends Entity<T>> implements Serializable {
 				limpar();
 				Util.addInfoMessage("Inclusão realizada com sucesso.");
 			} else {
-				Util.addWarnMessage("Erro ao incluir no banco de dados.");
+				Util.addErrorMessage("Erro ao incluir no banco de dados.");
 			}
 		}
 		
@@ -42,7 +42,7 @@ public abstract class Controller <T extends Entity<T>> implements Serializable {
 				limpar();
 				Util.addInfoMessage("Alteração realizada com sucesso.");
 			} else {
-				Util.addInfoMessage("Erro ao alterar no banco de dados.");
+				Util.addErrorMessage("Erro ao alterar no banco de dados.");
 			}
 		}
 	}
@@ -52,7 +52,7 @@ public abstract class Controller <T extends Entity<T>> implements Serializable {
 			limpar();
 			Util.addInfoMessage("Remoção realizada com sucesso.");
 		} else {
-			Util.addInfoMessage("Erro ao remover no banco de dados.");
+			Util.addErrorMessage("Erro ao remover no banco de dados.");
 		}
 	}
 

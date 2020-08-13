@@ -37,7 +37,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			
 			conn.commit();
 
-			System.out.println("Inclus√£o realizada com sucesso.");
+			System.out.println("Inclus„o realizada com sucesso.");
 			
 			retorno = true;
 
@@ -76,7 +76,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			
 			conn.commit();
 
-			System.out.println("Altera√ß√£o realizada com sucesso.");
+			System.out.println("AlteraÁ„o realizada com sucesso.");
 			
 			retorno = true;
 
@@ -110,7 +110,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			
 			conn.commit();
 
-			System.out.println("Remo√ß√£o realizada com sucesso.");
+			System.out.println("RemoÁ„o realizada com sucesso.");
 			
 			retorno = true;
 

@@ -36,7 +36,13 @@
 				</div>
 				<div class="card mb-4">
 					<div class="card-header">
-						<i class="fas fa-table mr-1"></i> DataTable Example
+						<i class="fas fa-table mr-1"></i> Listas de compras realizadas
+					</div>
+					<div class="card-body">
+						<div class="form-row">
+							<input type="text" class="form-control" id="txt_consulta"
+								placeholder="Pesquisar" />
+						</div>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -52,7 +58,7 @@
 									<h:column>
 										<f:facet name="header">Data</f:facet>
 										<h:outputLabel value="#{obj.data}">
-											<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+											<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
 										</h:outputLabel>
 									</h:column>
 									<h:column>
@@ -70,7 +76,8 @@
 
 									<h:column>
 										<f:facet name="header">Ação</f:facet>
-										<h:commandButton styleClass="btn btn-info" value="Detalhes ..."
+										<h:commandButton styleClass="btn btn-info"
+											value="Detalhes ..."
 											action="#{historicoController.detalhes(obj)}">
 											<f:ajax execute="@this" render="@none" />
 										</h:commandButton>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import pet.application.Util;
 import pet.model.TipoUsuario;
 import pet.model.Usuario;
 
@@ -49,7 +50,13 @@ public class SecurityFilter implements Filter {
 
 		if (usuario == null) {
 			((HttpServletResponse) response).sendRedirect("/pet/faces/login.xhtml");
-		} 
+		} else if (!usuario.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)) {
+			if (endereco.equals("/pet/faces/admin.xhtml") || endereco.equals("/pet/faces/usuario.xhtml")
+					|| endereco.equals("/pet/faces/servico.xhtml") || endereco.equals("/pet/faces/historico.xhtml")
+					|| endereco.equals("/pet/faces/detalhes.xhtml")) {
+				((HttpServletResponse) response).sendRedirect("/pet/faces/loja.xhtml");
+			}
+		}
 
 		chain.doFilter(request, response);
 		return;

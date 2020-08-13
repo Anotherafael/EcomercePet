@@ -7,17 +7,19 @@
 <ui:composition template="templateloja.xhtml">
 	<ui:define name="conteudo2">
 
-		<h:messages errorStyle="color:red" warnStyle="color:orange"
-			infoStyle="color:green" globalOnly="false" />
 		<main>
-			<div class="container-fluid">
-				<h1 class="mt-4">Carrinho</h1>
-				<BR />
+			<h:form>
+				<h:messages errorClass="alert alert-danger"
+					warnClass="alert alert-alert" infoClass="alert alert-success"
+					globalOnly="true"
+					style="list-style-type: none; text-align: center;" />
+				<div class="container-fluid">
+					<h1 class="mt-4">Carrinho</h1>
+					<BR />
 
-				<h:form>
-					<div class="row" style="text-align:center;">
+					<div class="row" style="text-align: center;">
 						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card mb-4" style="width:400px">
+							<div class="card mb-4" style="width: 400px">
 								<div class="card-header">
 									<i class="fas fa-table mr-1"></i>Itens no carrinho
 								</div>
@@ -37,22 +39,24 @@
 											</h:outputLabel>
 										</h:column>
 										<h:column>
-											<h:commandButton value="Remover" style="color: Crimson;"
+											<h:commandButton class="btn btn-danger" value="Remover"
 												action="#{carrinhoController.remover(obj.servico.id)}">
 												<f:ajax render="@form" execute="@this" />
 											</h:commandButton>
 										</h:column>
 									</h:dataTable>
-									<h:commandButton value="Finalizar Venda"
+
+									<h:commandButton class="btn btn-primary"
+										value="Finalizar Venda"
 										action="#{carrinhoController.finalizar}">
-										<f:ajax execute="@form" render="@form" />
+										<f:ajax execute="@form" render="@form dataTable" />
 									</h:commandButton>
 								</div>
 							</div>
 						</div>
 					</div>
-				</h:form>
-			</div>
+				</div>
+			</h:form>
 		</main>
 	</ui:define>
 </ui:composition>

@@ -9,97 +9,125 @@
 
 		<main>
 			<div class="container-fluid">
-				<h:messages errorStyle="color:red" warnStyle="color:orange"
-					infoStyle="color:green" globalOnly="false"
-					style="list-style-type: none; text-align: center; margin-top:10px;" />
 				<h1 class="mt-4">Perfil</h1>
-				<BR />
-				<h:form>
-					<div class="row" style="text-align: center;">
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card mb-4" style="min-width: 850px">
-								<div class="card-header">
-									<i class="fas fa-table mr-1"></i>Informações
-								</div>
-								<div class="card-body">
-									<h:dataTable class="table table-bordered" id="dataTable"
-										width="100%" cellspacing="0"
-										value="#{perfilController.usuario}" var="obj">
-										<h:column>
-											<f:facet name="header">Cliente</f:facet>
-											<h:outputLabel value="#{obj.nome}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Username</f:facet>
-											<h:outputLabel value="#{obj.login}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Função</f:facet>
-											<h:outputLabel value="#{obj.tipoUsuario.label}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Email</f:facet>
-											<h:outputLabel value="#{obj.email}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Data de Nascimento</f:facet>
-											<h:outputLabel value="#{obj.dataNascimento}">
-												<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
-											</h:outputLabel>
-										</h:column>
-										<h:column>
-											<h:commandButton class="btn btn-primary" value="Editar"
-												actionListener="#{usuarioController.editar(obj)}" />
-										</h:column>
-									</h:dataTable>
+				<div class="row">
+
+					<h:form>
+						<div class="row" style="text-align: center;">
+							<div class="col-lg-4 col-md-6 mb-4">
+								<div class="card mb-4" style="min-width: 800px">
+									<div class="card-header">
+										<i class="fas fa-table mr-1"></i>Informações
+									</div>
+									<div class="card-body">
+										<h:dataTable class="table table-bordered" id="dataTable"
+											width="100%" cellspacing="0"
+											value="#{perfilController.usuario}" var="obj">
+											<h:column>
+												<f:facet name="header">Cliente</f:facet>
+												<h:outputLabel value="#{obj.nome}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">Username</f:facet>
+												<h:outputLabel value="#{obj.login}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">Função</f:facet>
+												<h:outputLabel value="#{obj.tipoUsuario.label}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">Email</f:facet>
+												<h:outputLabel value="#{obj.email}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">Data de Nascimento</f:facet>
+												<h:outputLabel value="#{obj.dataNascimento}">
+													<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+												</h:outputLabel>
+											</h:column>
+											<h:column>
+												<h:commandButton class="btn btn-primary" value="Editar"
+													actionListener="#{usuarioController.editar(obj)}" />
+											</h:column>
+										</h:dataTable>
+									</div>
 								</div>
 							</div>
 						</div>
+					</h:form>
+					<div class="col-xl-6">
+						<div class="card mb-4" style="min-width: 500px;">
+							<div class="card-header">
+								<i class="fas fa-chart-area mr-1"></i> Informações do Usuário
+							</div>
+							<h:form>
+								<div class="card-body">
+									<div class="form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Nome</label>
+												<h:inputText class="form-control py-4" id="itNome"
+													required="true"
+													requiredMessage="O nome não pode estar vazio."
+													value="#{usuarioController.entity.nome}" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Username</label>
+												<h:inputText class="form-control py-4"
+													value="#{usuarioController.entity.login}" />
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="small mb-1">Email</label>
+										<h:inputText class="form-control py-4"
+											value="#{usuarioController.entity.email}" />
+									</div>
+									<div class="form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Password</label>
+												<h:inputSecret class="form-control py-4" id="isSenha"
+													value="#{usuarioController.entity.senha}" required="true"
+													requiredMessage="A senha não pode estar vazia." />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Data de Nascimento
+													(dd/MM/yyyy)</label>
+													<h:outputLabel class="small mb-1" ></h:outputLabel>
+												<h:inputText styleClass="dateClass form-control py-4" id="itDataNascimento"
+													value="#{usuarioController.entity.dataNascimento}"
+													required="true" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"
+													requiredMessage="A data não pode estar vazia.">
+													<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+												</h:inputText>
+											</div>
+										</div>
+									</div>
+
+									<div
+										class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+
+										<h:commandButton class="btn btn-primary" style="width:25%;"
+											value="Alterar"
+											disabled="#{usuarioController.entity.id == null}"
+											actionListener="#{usuarioController.alterar}" />
+										<h:commandButton class="btn btn-primary" style="width:25%;"
+											value="Limpar" actionListener="#{usuarioController.limpar}">
+											<f:ajax execute="@this" render="@form" />
+										</h:commandButton>
+									</div>
+								</div>
+							</h:form>
+						</div>
 					</div>
-				</h:form>
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputLabel value="Nome:" />
-						<h:panelGroup>
-							<h:inputText id="itNome" value="#{usuarioController.entity.nome}" />
-							<h:message for="itNome" style="color:red" />
-						</h:panelGroup>
-
-						<h:outputLabel value="Login:" />
-						<h:inputText value="#{usuarioController.entity.login}" />
-
-						<h:outputLabel value="Senha:" />
-						<h:panelGroup>
-							<h:inputSecret id="isSenha"
-								value="#{usuarioController.entity.senha}" required="true"
-								requiredMessage="A senha não pode estar vazia." />
-							<h:message for="isSenha" style="color:red" />
-						</h:panelGroup>
-
-						<h:outputLabel value="E-mail:" />
-						<h:inputText value="#{usuarioController.entity.email}" />
-
-						<h:outputLabel value="Data de Nascimento:" />
-						<h:panelGroup>
-							<h:inputText id="itDataNascimento"
-								value="#{usuarioController.entity.dataNascimento}">
-								<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
-							</h:inputText>
-							<h:message for="itDataNascimento" style="color:red" />
-						</h:panelGroup>
-
-					</h:panelGrid>
-					<h:commandButton value="Alterar"
-						disabled="#{usuarioController.entity.id == null}"
-						actionListener="#{usuarioController.alterar}" />
-					<h:commandButton value="Limpar"
-						actionListener="#{usuarioController.limpar}">
-						<f:ajax execute="@this" render="@form" />
-					</h:commandButton>
-				</h:form>
-				<BR /> <BR />
+					<BR /> <BR /> <BR />
+				</div>
 			</div>
-
 		</main>
 	</ui:define>
 </ui:composition>

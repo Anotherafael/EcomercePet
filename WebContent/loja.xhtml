@@ -57,7 +57,7 @@
 								<p class="card-text"><h:outputLabel value="#{obj.descricao}"></h:outputLabel></p>
 							</div>
 							<div class="card-footer" style="text-align:center">
-								<h:commandButton value="Adicionar ao Carrinho"
+								<h:commandButton class="btn btn-success" value="Adicionar ao Carrinho"
 									actionListener="#{vendaServicoController.adicionar(obj.id)}">
 									<f:ajax render="@all" execute="@this" />
 								</h:commandButton>

@@ -23,20 +23,20 @@ public class CarrinhoController implements Serializable {
 
 	private Venda venda;
 	private int tamanho = 0;
-	
+
 	public int getTamanho() {
 		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
-		
+
 		if (carrinho != null) {
-			return carrinho.size();			
-		} 
+			return carrinho.size();
+		}
 		return 0;
 	}
 
 	public void setTamanho(int tamanho) {
 		this.tamanho = tamanho;
 	}
-	
+
 	public Venda getVenda() {
 		if (venda == null)
 			venda = new Venda();
@@ -55,7 +55,7 @@ public class CarrinhoController implements Serializable {
 	public String remover(int idProduto) {
 
 		// Obtendo o carrinho da sessão.
-		
+
 		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
 		int cont = 0;
 		for (ItemVenda itemVenda : carrinho) {
@@ -65,35 +65,41 @@ public class CarrinhoController implements Serializable {
 			}
 			cont++;
 		}
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "carrinho.xhtml?faces-redirect=true";
 	}
 
 	public String finalizar() {
 		Usuario usuario = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
-		if (usuario == null) {
-			Util.addWarnMessage("Eh preciso estar logado para realizar uma venda. Faça o Login!!");
-			return "login.xhtml?faces-redirect=true";
-		}
+		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
 		// montar a venda
+
+		if (venda.getListaItemVenda().size() == 0) {
+			Util.addErrorMessage("Carrinho está vazio");
+			return "";
+		}
+
 		Venda venda = new Venda();
 		venda.setData(LocalDate.now());
 		venda.setUsuario(usuario);
-
-		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
 		venda.setListaItemVenda(carrinho);
 
 		// salvar no banco
 		VendaDAO dao = new VendaDAO();
 		if (dao.create(venda)) {
-			Util.addInfoMessage("Venda realizada com sucesso.");
 			// limpando o carrinho
 			Session.getInstance().setAttribute("carrinho", null);
+			Util.addInfoMessage("Venda realizada com sucesso");
 			return "carrinho.xhtml?faces-redirect=true";
 		} else {
 			Util.addErrorMessage("Erro ao finalizar a Venda.");
-			return "404.html?faces-redirect=true";
 		}
-		
+		return "";
 	}
 
 	public void setVenda(Venda venda) {

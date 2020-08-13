@@ -53,16 +53,16 @@
 											<div class="form-group">
 												<label class="small mb-1">Data de Nascimento
 													(dd/MM/yyyy)</label>
-												<h:inputText class="form-control py-4" id="itDataNascimento"
+												<h:inputText id="itDataNascimento"
 													value="#{usuarioController.entity.dataNascimento}"
-													required="true"
+													required="true" styleClass="dateClass form-control py-4"
 													requiredMessage="A data não pode estar vazia.">
 													<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
 												</h:inputText>
 											</div>
 										</div>
 									</div>
-									<div class="form-row"> 
+									<div class="form-row">
 										<h:selectOneMenu
 											value="#{usuarioController.entity.tipoUsuario}">
 											<f:selectItems value="#{usuarioController.listaTipoUsuario}"
@@ -71,19 +71,22 @@
 									</div>
 									<div
 										class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-										<h:commandButton class="btn btn-primary" style="width:25%;" value="Incluir"
+										<h:commandButton class="btn btn-primary" style="width:25%;"
+											value="Incluir"
 											disabled="#{usuarioController.entity.id != null}"
 											actionListener="#{usuarioController.incluir}" />
-										<h:commandButton class="btn btn-primary" style="width:25%;" value="Alterar"
+										<h:commandButton class="btn btn-primary" style="width:25%;"
+											value="Alterar"
 											disabled="#{usuarioController.entity.id == null}"
 											actionListener="#{usuarioController.alterar}" />
-										<h:commandButton class="btn btn-primary" style="width:25%;" value="Excluir"
+										<h:commandButton class="btn btn-primary" style="width:25%;"
+											value="Excluir"
 											disabled="#{usuarioController.entity.id == null}"
 											actionListener="#{usuarioController.remover}">
 											<f:ajax execute="@this" render="@form formDataTable" />
 										</h:commandButton>
-										<h:commandButton class="btn btn-primary" style="width:25%;" value="Limpar"
-											actionListener="#{usuarioController.limpar}">
+										<h:commandButton class="btn btn-primary" style="width:25%;"
+											value="Limpar" actionListener="#{usuarioController.limpar}">
 											<f:ajax execute="@this" render="@form" />
 										</h:commandButton>
 									</div>
@@ -107,11 +110,16 @@
 						<i class="fas fa-table mr-1"></i> Usuários Cadastrados
 					</div>
 					<div class="card-body">
+						<div class="form-row">
+							<input type="text" class="form-control" id="txt_consulta" placeholder="Pesquisar" />
+						</div>
+					</div>
+					<div class="card-body">
 						<div class="table-responsive">
 							<h:form id="formDataTable">
 								<h:dataTable class="table table-bordered" id="dataTable"
 									width="100%" cellspacing="0"
-									value="#{usuarioController.listaUsuario}" var="obj">
+									value="#{consultaUsuarioController.listaUsuario}" var="obj">
 									<h:column>
 										<f:facet name="header">Id</f:facet>
 										<h:outputLabel value="#{obj.id}" />
